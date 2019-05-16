@@ -1,0 +1,33 @@
+{%extends 'event/base.html'%}
+{% block title %}Campus Events{% endblock %}
+{%block content%}
+
+
+<div class="container">
+    <div class="row">
+
+        {%if event%}
+        {%for event in event%}
+        <div class="col-sm-3" style="padding:10px;">
+            <div class="card card-default">
+                <div class="card-body">
+                    <a href="{%url 'event:detail' event.id%}">
+                        <img src="{{event.event_cover.url}}" class="img img-responsive" alt="" style="height:200px; width:80%;">
+                    </a>
+                    <div class="caption">
+                        <h5 style="color:blue">{{event.event_name}}</h5>
+                        <h6>{{event.event_host}}</h6>
+
+                         <a href="{%url 'event:event-update' event.id%}" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></a>
+                            <a href="{%url 'event:event-delete' event.id%}" class="btn btn-secondary btn-sm"  style="float:right;"><i class="fas fa-trash"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+        {%endif%}
+
+    </div>
+</div>
+{%endblock%}

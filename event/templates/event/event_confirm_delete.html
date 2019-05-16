@@ -1,0 +1,26 @@
+{% extends 'event/base.html' %}
+{% block title %}Confirm delete{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class='row'>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="card card-body my-1">
+                <h3>Delete Event {{ object.name}}</h3>
+                <hr>
+                <p>Are you sure you want to delete?</p>
+                <form method="post">
+                    {%csrf_token%}
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-danger">Yes, delete</button>
+                        <a href="{url 'event:index'%}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

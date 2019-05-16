@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+{% load static %}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+</head>
+
+
+<body style="background-color:grey;">
+
+<nav class="navbar navbar-inverse bg-light">
+  <a class="navbar-brand" href="{%url 'event:index'%}">Avan University</a>
+  <form class="form-inline">
+
+        <a href="{% url 'event:create_event' %}"><i class="fas fa-plus-square"></i> Add Event</a>
+
+
+    <input type="text" class="form-control mr-sm-2" name="q" value="{{request.GET.q}}" placeholder="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+{% block content %}{% endblock %}
+</body>
+</html>

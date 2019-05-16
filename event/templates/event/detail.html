@@ -1,0 +1,46 @@
+{%extends 'event/base.html'%}
+{% block title %}Details{% endblock %}
+{%block content%}
+
+<div class="container">
+    <div class="row">
+        <!--event info-->
+        <div class="col-sm-3">
+            <div class="card card-default">
+                <div class="card-body">
+                    <img src="{{event.event_cover.url}}" class="img img-responsive" alt="" style="height:200px; width:80%">
+                    <div class="caption">
+                        <h5>{{event.event_name}}</h5>
+                        <h5>{{event.event_host}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <ul class="nav nav-pills">
+                <li><a href="{%url 'event:create_detail' event.id%}">Add Detail</a> </li>
+            </ul>
+            <table class="table table-default">
+                <thead>
+                <th>Event Description</th>
+                <th>Event Location</th>
+                <th>Time</th>
+                </thead>
+                <tbody>
+                {%if event.detail_set%}
+                {%for detail in event.detail_set.all%}
+                <tr>
+                    <td>{{detail.description}}</td>
+                     <td>{{detail.place}}</td>
+                     <td>{{detail.time}}</td>
+                    <td><a href="{%url 'event:detail-update' detail.id%}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+
+                </tr>
+                {%endfor%}
+                {%endif%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endblock%}
