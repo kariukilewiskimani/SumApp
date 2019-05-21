@@ -12,11 +12,12 @@
 
 <body style="background-color:grey;">
 
-<nav class="navbar navbar-inverse bg-light">
-  <a class="navbar-brand" href="{%url 'event:index'%}">Avan University</a>
+<nav class="navbar navbar-dark bg-dark">
+
+    <a class="navbar-brand" href="{%url 'event:index'%}"><i class="fas fa-graduation-cap"></i><b>  Avan University</b></a>
   <form class="form-inline">
 
-        <a href="{% url 'event:create_event' %}"><i class="fas fa-plus-square"></i> Add Event</a>
+        <a href="{% url 'event:create_event' %}"><i class="fas fa-plus-square"></i> Add Event/ Candidacy</a>
 
 
     <input type="text" class="form-control mr-sm-2" name="q" value="{{request.GET.q}}" placeholder="Search">

@@ -28,7 +28,7 @@ def create_event(request):
         event.event_cover = request.FILES['event_cover']
         event.save()
         return render(request, 'event/index.html', {'form': form})
-    return render(request, 'event/index.html', {'form': form})
+    return render(request, 'event/create_event.html', {'form': form})
 
 class EventUpdateView(UpdateView):
     model = Event
@@ -41,24 +41,32 @@ class EventDeleteView(DeleteView):
 
 def create_detail(request, event_id):
     form = DetailForm(request.POST or None, request.FILES or None)
-    detail = get_object_or_404(Event, pk=event_id)
+    event = get_object_or_404(Event, pk=event_id)
     if form.is_valid():
-        for d in detail.detail_set.all():
+        detail = form.save(commit=False)
+        for d in event.detail_set.all():
             if d.description == form.cleaned_data.get('description'):
                 context = {
                     'form': form,
                     'message': 'Description Already Exists'
                 }
-                return render(request, 'event/detail.html', context)
-        detail = form.save()
-        detail.event = detail
-        return render(request, 'event/detail.html', {'detail': detail})
+                return render(request, 'event/create_detail.html', context)
+
+        detail.event= event
+        detail.save()
+        return render(request, 'event/detail.html', {'event': event})
     return render(request, 'event/create_detail.html', {'form': form})
 
 class DetailUpdateView(UpdateView):
     model = Detail
     fields = ['description', 'place', 'time']
     template_name = 'event/create_detail.html'
+
+    def form_valid(self, form, **kwargs):
+        event = get_object_or_404(Event, pk=self.kwargs.get('pk'))
+        form.instance.event = event
+        return super().form_valid(form)
+
 
 
 
